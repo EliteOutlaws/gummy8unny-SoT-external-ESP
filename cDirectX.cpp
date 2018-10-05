@@ -217,6 +217,11 @@ int Render()
 						info.id = ActorID;
 						info.name = "Chest of Legends";
 						info.rareity = Fort;
+						if (name.find("DVR") != std::string::npos)
+						{
+							info.id = ActorID;
+							info.name = "Ashen Legend Chest";
+						}
 					}
 					if (name.find("StrongholdKey") != std::string::npos || name.find("StrongholdKey") != std::string::npos && name.find("Proxy") != std::string::npos)
 					{
@@ -379,8 +384,8 @@ int Render()
 
 					ActorArray.push_back(info);
 				}
-				// Wonder Secrets Box
-				else if (name.find("BP_BoxOfSecrets") != std::string::npos)
+				// Wonder Secrets Box - Not sure if this is the correct name, but its a proxy based chest
+				else if (name.find("BP_AncientChest_P") != std::string::npos || name.find("BP_BoxOfSecrets") != std::string::npos || name.find("BP_AncientChest") != std::string::npos && name.find("Proxy") != std::string::npos)
 				{
 					info.id = ActorID;
 					info.type = secretBox;
@@ -391,18 +396,14 @@ int Render()
 					ActorArray.push_back(info);
 				}
 				// Active Volcano
-				else if (name.find("BP_Volcano") != std::string::npos)
+				else if (name.find("BP_SuperheatedWater") != std::string::npos)
 				{
 					info.type = volcano;
 					info.Location = Actorrelativelocation;
 					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
-					if (name.find("IslandBased") != std::string::npos || name.find("SeaBased") != std::string::npos)
-					{
-						info.id = ActorID;
-						info.name = "!ACTIVE VOLCANO!";
-					}
-
-				ActorArray.push_back(info);
+					info.id = ActorID;
+					info.name = "!ACTIVE VOLCANO!";
+					ActorArray.push_back(info);
 				}
 				// Treasure Artifacts (Shinys)
 				else if (name.find("BP_TreasureArtifact") != std::string::npos || name.find("BP_Treasure_Artifact") != std::string::npos && name.find("Proxy") != std::string::npos || name.find("BP_TreasureArtifact_Wieldable") != std::string::npos)
