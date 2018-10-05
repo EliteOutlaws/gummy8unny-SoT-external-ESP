@@ -21,9 +21,7 @@ MUST BE IN WINDOWED MODE TO WORK.
 Current issues:
 - X marks the spot doesn't work since 1.3 update. 
   - TeasureMaps is now an empty array. ```:UIslandDataAssetEntry:TreasureMaps:SoT_Athena_classes.hpp```
-- ESP markers aren't 100% accurate
 - Other player health bar isn't showing
-- Mini-map is fairly accurate for 90% of items and other players/ships.
 
 To do:
 - Fix current issues
