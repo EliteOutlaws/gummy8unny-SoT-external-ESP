@@ -236,24 +236,44 @@ int Render()
 						info.id = ActorID;
 						info.name = "Foul Skull";
 						info.rareity = Common;
+						if (name.find("DVR") != std::string::npos)
+						{
+							info.id = ActorID;
+							info.name = "Ashen Foul";
+						}
 					}
 					if (name.find("Rare") != std::string::npos)
 					{
 						info.id = ActorID;
 						info.name = "Disgraced Skull";
 						info.rareity = Rare;
+						if (name.find("DVR") != std::string::npos)
+						{
+							info.id = ActorID;
+							info.name = "Ashen Disgraced";
+						}
 					}
 					if (name.find("Legendary") != std::string::npos)
 					{
 						info.id = ActorID;
 						info.name = "Hateful Skull";
 						info.rareity = Legendary;
+						if (name.find("DVR") != std::string::npos)
+						{
+							info.id = ActorID;
+							info.name = "Ashen Haeful";
+						}
 					}
 					if (name.find("Mythical") != std::string::npos)
 					{
 						info.id = ActorID;
 						info.name = "Villionous Skull";
 						info.rareity = Mythical;
+						if (name.find("DVR") != std::string::npos)
+						{
+							info.id = ActorID;
+							info.name = "Ashen Villionous";
+						}
 					}
 					if (name.find("Fort") != std::string::npos)
 					{
@@ -363,12 +383,26 @@ int Render()
 				else if (name.find("BP_BoxOfSecrets") != std::string::npos)
 				{
 					info.id = ActorID;
-					info.type = chest;
+					info.type = secretBox;
 					info.name = "Box Of Secrets";
 					info.Location = Actorrelativelocation;
 					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 300);
 					info.yaw = ActorYaw;
 					ActorArray.push_back(info);
+				}
+				// Active Volcano
+				else if (name.find("BP_Volcano") != std::string::npos)
+				{
+					info.type = volcano;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
+					if (name.find("IslandBased") != std::string::npos || name.find("SeaBased") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "!ACTIVE VOLCANO!";
+					}
+
+				ActorArray.push_back(info);
 				}
 				// Treasure Artifacts (Shinys)
 				else if (name.find("BP_TreasureArtifact") != std::string::npos || name.find("BP_Treasure_Artifact") != std::string::npos && name.find("Proxy") != std::string::npos || name.find("BP_TreasureArtifact_Wieldable") != std::string::npos)
@@ -720,7 +754,20 @@ int Render()
 					ScreenPoint.x = 330;
 				if (ScreenPoint.y > 330)
 					ScreenPoint.y = 330;
-
+				// Volcano ESP Drawing.
+				if (ActorArray.at(i).type == volcano)
+				{
+					FillRGB(ScreenPoint.x - 2, ScreenPoint.y - 2, 4, 4, 255, 125, 0, 255);
+					if (WorldToScreen(ActorArray.at(i).Location, &ScreenPoint))
+						DrawString(const_cast<char*>(ActorArray.at(i).name.c_str()), ScreenPoint.x, ScreenPoint.y, 165, 42, 42, pFontSmall);
+				}
+				// Box Of Secrets ESP Drawing.
+				else if (ActorArray.at(i).type == secretBox)
+				{
+					FillRGB(ScreenPoint.x - 2, ScreenPoint.y - 2, 4, 4, 157, 0, 255, 255);
+					if (WorldToScreen(ActorArray.at(i).Location, &ScreenPoint))
+						DrawString(const_cast<char*>(ActorArray.at(i).name.c_str()), ScreenPoint.x, ScreenPoint.y, 230, 230, 250, pFontSmall);
+				}
 				// Player Ship ESP Drawing.
 				if (ActorArray.at(i).type == ship)
 				{

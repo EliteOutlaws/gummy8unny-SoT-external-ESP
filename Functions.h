@@ -105,7 +105,9 @@ enum type
 	snake,
 	fort,
 	ghostship,
-	ghostcaptain
+	ghostcaptain,
+	volcano,
+	secretBox
 };
 
 struct AActors
